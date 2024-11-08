@@ -1,0 +1,66 @@
+\documentclass{standalone}
+\usepackage{glossingtool}
+\usepackage{booktabs}
+\usepackage{multirow}
+
+\usepackage{fontspec}
+\usepackage{libertine}
+\usepackage{gentium}
+\setmainfont[BoldFont={Gentium Basic Bold} 
+%Doesn't have a bold version so we're using a related font for that.
+]{Gentium Plus} %Best IPA supporting font I was able to find. 
+%1.5 line spacing, available from the setspace package
+
+\begin{document}
+
+%\textbf{Stress is on: Long syllable > fortis onset > closed syllable > penultimate syllable}
+
+
+\begin{tabular}
+
+open short & 
+closed short&
+fortis onset&
+open long &
+closed long&
+
+\end{tabular}
+
+
+%\begin{table}
+%	\label{tab:stress}
+%	\caption{Examples for stress in various contexts}
+	\begin{tabular}{lllll}
+		&	\multicolumn{2}{c}{Mono-morphemic}		&\multicolumn{2}{c}{Poly-morphemic}		\\
+		\midrule
+		\multirow{2}{2cm}{open syllable (short)}	&	{[ˈpa.la]} &\qu{speak}		& [ˈpa.la.ke]& \qu{speak [a language]}		\\
+		&	{[ˈfa.to]} &\qu{drink warm}		& [ˈfɛ̃.ã.nã.ke] &\qu{show}	\\
+		%&	{[ˈfa.va]} &\qu{four}&  &\\
+		\midrule		
+		\multirow{3}{2cm}{open (syllable (long))}	&	{[ˈsaː.m̥ãt]} &\qu{fog}	&	[fu.ˈnãː.ke] &\qu{preach}			\\
+		& {[ɣe.ˈtʰoː]} &\qu{landing net} & [ˈɣa.fu.nã]& \qu{middle finger (lit. \qu{preacher})}\\
+		& {[ˈmãː.vu]} & \qu{close eyes} &&\\
+		\midrule
+		\multirow{3}{2cm}{closed syllables (short)}&	{[ˈɣaⁿ.ɟe]} &\qu{eat.juicy}  	& [ˈɣa.le.lu] &\qu{see them}		 \\		
+		&	{[ˈm̥aw.tɕɛp]}& \qu{noni tree}& &		\\	
+		&	{[ˈuⁿ.du]} &\qu{drink cold}&&\\
+		
+		\midrule		
+		\multirow{3}{2cm}{closed syllables (long)}&{[ɣa.ˈkɔːp]}& \qu{wild}&[ɲãˈkõ:ŋ] &\qu{for me}	\\
+		&{[te.mĩ.ˈnɛ̃ːn]} & \qu{float}& [si.nũ.ˈxiːt]& \qu{painful suffering}\\
+		&{[xa.ˈsaːt]} & \qu{jump}& [fa.ˈto̟ːm]&\qu{your drink}\\
+		\midrule
+		\multirow{4}{2cm}{3 syllables}& 	{[fʷaⁿ.ˈɟi.mʷã]}&\qu{ask}	&	[fʷaⁿ.ˈɟi.mʷã.ke]&\qu{ask (\gl{tr})}	\\
+		&	{[ˈpu.a.ka]} &\qu{pig}	&	[pu.a.ˈka.nɛ̃ɔ̃ŋ] &\qu{my pig} \\
+		&	{[ˈtʰɔ.a.tit]}& \qu{sky}	&	{[ˈtʰɔ.a.tit̚.tɕa]}	& \qu{this day}\\
+		&   {[pu.ˈpʷaː.le]}& \qu{European} &	[pa.ˈpan.go] &\qu{your father} \\
+		&	{[tʰe.ˈxʷaːⁿ.de]}& \qu{Tiouandé village}	&[ˈɣaᵐ.bu.na]& \qu{thief}				\\
+		&  {[pʷa.la.lu]} & \qu{rainbow} & & \\
+	\end{tabular}
+%	
+%\end{table}
+
+
+
+\end{document}
+

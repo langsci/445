@@ -1,0 +1,47 @@
+\documentclass{standalone}
+
+\usepackage[edges]{forest}
+\usepackage{tikz-qtree}
+\usetikzlibrary{trees,calc,backgrounds, positioning,arrows.meta}
+
+\begin{document}
+		\begin{forest}
+		for tree={
+			fit=band,
+			parent anchor=south,
+			child anchor=north,
+			if n children=0{
+				font=\itshape,
+				tier=terminal,
+			}{},
+		}
+		[NP
+		[\textsc{art}
+		[i{=}]
+		]
+		[NP	
+		[NP
+		[Intensifier
+		[juu] 
+		]
+		[N
+		[joakan] 
+		]
+		]
+		[\textsc{cnj}	
+		[ma] 
+		]
+		[VP
+		[Intensifier
+		[juu]
+		] 
+		[V
+		[xhopwen]
+		]]
+		[N
+		[juu-sapwen-eong]
+		]
+		]
+		]
+	\end{forest}
+\end{document}

@@ -1,0 +1,78 @@
+\documentclass{standalone}
+\usepackage{fontspec}
+%\usepackage{libertine}
+%\usepackage{gentium}
+
+\setmainfont[BoldFont={Gentium Basic Bold} 
+%Doesn't have a bold version so we're using a related font for that.
+]{Gentium Plus} %Best IPA supporting font I was able to find. 
+%1.5 line spacing, available from the setspace package
+
+\usepackage{tikz}
+\usetikzlibrary{calc,intersections,angles}
+
+\newcommand{\topnode}[2][1]{\node[circle, minimum size=22](#1) at (1,1) {#2};}
+\newcommand{\topleftnode}[2][4]{\node[circle, minimum size=22](#1) at (0.7,1) {#2};}
+\newcommand{\toprightnode}[2][5]{\node[circle, minimum size=22](#1) at (1.3,1) {#2};}
+\newcommand{\leftnode}[2][2]{\node[circle, minimum size=22](#1) at (0,0) {#2};}
+\newcommand{\rightnode}[2][3]{\node[circle, minimum size=22](#1) at (2,0) {#2};}
+
+\newcommand{\convexpath}[2]{
+	[   
+	create hullnodes/.code={
+		\global\edef\namelist{#2}
+		\foreach [count=\counter] \nodename in \namelist {
+			\global\edef\numberofnodes{\counter}
+			\node at (\nodename) [draw=none,name=hullnode\counter] {};
+		}
+		\node at (hullnode\numberofnodes) [name=hullnode0,draw=none] {};
+		\pgfmathtruncatemacro\lastnumber{\numberofnodes+1}
+		\node at (hullnode1) [name=hullnode\lastnumber,draw=none] {};
+	},
+	create hullnodes
+	]
+	($(hullnode1)!#1!-90:(hullnode0)$)
+	\foreach [
+	evaluate=\currentnode as \previousnode using \currentnode-1,
+	evaluate=\currentnode as \nextnode using \currentnode+1
+	] \currentnode in {1,...,\numberofnodes} {
+		-- ($(hullnode\currentnode)!#1!-90:(hullnode\previousnode)$)
+		let \p1 = ($(hullnode\currentnode)!#1!-90:(hullnode\previousnode) - (hullnode\currentnode)$),
+		\n1 = {atan2(\y1,\x1)},
+		\p2 = ($(hullnode\currentnode)!#1!90:(hullnode\nextnode) - (hullnode\currentnode)$),
+		\n2 = {atan2(\y2,\x2)},
+		\n{delta} = {-Mod(\n1-\n2,360)}
+		in 
+		{arc [start angle=\n1, delta angle=\n{delta}, radius=#1]}
+	}
+	-- cycle
+}
+
+\newcommand{\Rohlederalign}[1]{
+	\draw \convexpath{0.35cm}{#1};
+}
+
+\newcommand{\single}[1]{
+	\draw (#1) circle (11.2pt);
+}
+
+\usepackage{expex-acro} %for glossing examples
+
+\DeclareAcronym{s_a_}{short=S\textsubscript{A},long=S~marked~like~A,short-format=\scshape}
+\DeclareAcronym{s_p_}{short=S\textsubscript{P},long=S~marked~like~P,short-format=\scshape}
+\DeclareAcronym{p}{short=p,long=patient-like~argument~of~canonical~transitive~verb,short-format=\scshape}
+\DeclareAcronym{a}{short=a,long=agent-like~argument~of~canonical~transitive~verb,short-format=\scshape}
+
+\begin{document}
+	\begin{tikzpicture}
+	\topleftnode[sa]{\gl{S\textsubscript{A}}}
+	\toprightnode[sp]{\gl{s_p_}}
+	\leftnode[a]{\gl{a}}
+	\rightnode[p]{\gl{p}}
+	\draw (a) circle (11.2pt);
+	\draw (p) circle (11.2pt);
+	\draw \convexpath{0.35cm}{sa,sp};
+\end{tikzpicture}
+
+
+\end{document}
